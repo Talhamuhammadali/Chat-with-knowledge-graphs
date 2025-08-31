@@ -14,15 +14,31 @@ services:
       timeout: 30s
       retries: 5
       start_period: 30s
+  neo4j-init:
+    image: neo4j:latest
+    volumes:
+      - ./db/data/:/dumps
+      - neo4j-data:/data
+    command: >
+      bash -c "
+        if [ ! -f /data/dbms/database_id ]; then
+          neo4j-admin database load --from-path=/dumps/ neo4j --overwrite-destination=true
+        fi
+      "
+    
   neo4j:
     image: neo4j:latest
     container_name: neo4j
+    depends_on:
+      - neo4j-init
     ports:
-      - "7474:7474"  # HTTP
-      - "7687:7687"  # Bolt
+      - "7474:7474"
+      - "7687:7687"
     environment:
-      - NEO4J_AUTH=neo4j/neo4jtest  # Change password as needed
+      - NEO4J_AUTH=neo4j/neo4jtest
+      - NEO4J_ACCEPT_LICENSE_AGREEMENT=yes
     volumes:
+      - ./db/data/:/dumps
       - neo4j-data:/data
     restart: unless-stopped
     healthcheck:

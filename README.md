@@ -7,3 +7,5 @@ The objective of this repository is to learn about RAG systems that use knowledg
 - **neomodel**: OGM (Object Graph Mapper) for managing knowledge graphs
 - **Redis and SQLite checkpointers**: For short-term and long-term memory for our agents
 
+## Project One
+Experimenting with creating a basic agent that can use the available data to answer basic question from graph database. Its not graph rag yet but normal tool based retreival using parameterized queries.

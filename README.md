@@ -8,7 +8,7 @@ The objective of this repository is to learn about RAG systems that use knowledg
 - **Redis and SQLite checkpointers**: For short-term and long-term memory for our agents
 
 ## Project One
-Experimenting with creating a basic agent that can use the available data to answer basic question from graph database. Its not graph rag yet but normal tool based retreival using parameterized queries.
-### Learnings
+Experimenting with creating a basic agent that can use available data to answer basic questions from a graph database. This is not graph RAG yet, but rather normal tool-based retrieval using parameterized queries.
 
-- I am creating my own llms router but i will use the langchains init model a test it if it works with gpt-5-codex
+### Learnings
+- I am creating my own LLM router, but I will also use LangChain's `init_chat_model`. It overrides the initialization of chat models while keeping the arguments consistent, so I can easily switch between custom and init-based implementations. Check `llm.py` to see what i mean.

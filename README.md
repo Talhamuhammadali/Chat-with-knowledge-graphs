@@ -9,3 +9,6 @@ The objective of this repository is to learn about RAG systems that use knowledg
 
 ## Project One
 Experimenting with creating a basic agent that can use the available data to answer basic question from graph database. Its not graph rag yet but normal tool based retreival using parameterized queries.
+### Learnings
+
+- I am creating my own llms router but i will use the langchains init model a test it if it works with gpt-5-codex

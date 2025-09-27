@@ -6,13 +6,14 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "asyncio>=4.0.0",
+    "langchain",
     "langchain-anthropic>=0.3.19",
     "langchain-community>=0.3.29",
     "langchain-core>=0.3.75",
     "langchain-google-genai>=2.1.10",
     "langchain-huggingface>=0.3.1",
     "langchain-openai>=0.3.32",
-    "langgraph>=0.6.6",
+    "langgraph>=0.6.7",
     "langgraph-checkpoint-redis>=0.1.1",
     "langgraph-checkpoint-sqlite>=2.0.11",
     "langgraph-cli[inmem]>=0.4.0",

@@ -1,10 +1,7 @@
 """Connections to the knowledge graph database."""
 import os
 
-from dotenv import load_dotenv
 from neomodel import config, db
-
-load_dotenv() 
 
 def setup_basic_connection():
     """
@@ -29,7 +26,3 @@ def get_db_status():
         return f"Connection failed: {e}"
     
 
-if __name__ == "__main__":
-    print("Setting up connection...")
-    print(setup_basic_connection())
-    print(get_db_status())

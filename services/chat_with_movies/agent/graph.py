@@ -9,7 +9,8 @@ def temp_node():
     pass
 
 AGENT_WORKFLOW = StateGraph(GraphAgentState)
-AGENT_WORKFLOW.add_node("assistent", temp_node)
+AGENT_WORKFLOW.add_node("agent", temp_node)
+AGENT_WORKFLOW.add_node("subagent", temp_node)
 AGENT_WORKFLOW.add_node("tool", temp_node)
 AGENT_WORKFLOW.add_node("ask_human", temp_node)
 
@@ -20,6 +21,7 @@ AGENT_WORKFLOW.add_conditional_edges(
     {
         "tool": "tool",
         "human": "ask_human",
+        "subagent": "subagent",
         "finish": END,
     },    
 )

@@ -51,7 +51,7 @@ def test_all_models():
 
     test_prompt = "Provide a brief introduction about yourself as an AI language model and summarize your key capabilities in 2-3 sentences."
 
-    providers = ["openai:", "anthropic", "google"]
+    providers = ["openai", "anthropic", "google"]
 
     for provider in providers:
         print(f"\n{'='*50}")

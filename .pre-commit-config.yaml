@@ -1,0 +1,37 @@
+# Pre-commit hooks configuration
+# These run automatically before each commit
+# If they modify files, commit is blocked so you can review changes
+
+repos:
+  # Ruff - Fast Python linter and formatter
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.4
+    hooks:
+      # Format code (auto-fixes formatting issues)
+      - id: ruff-format
+        types_or: [python, pyi]
+
+      # Lint and auto-fix what's possible
+      - id: ruff
+        args: [--fix]
+        types_or: [python, pyi]
+
+  # Mypy - Type checking (reports errors, doesn't auto-fix)
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.13.0
+    hooks:
+      - id: mypy
+        args: [--config-file=pyproject.toml]
+        additional_dependencies: []
+
+  # Standard pre-commit hooks for common issues
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace   # Remove trailing spaces
+      - id: end-of-file-fixer     # Ensure newline at end of files
+      - id: check-yaml            # Validate YAML syntax
+      - id: check-toml            # Validate TOML syntax
+      - id: check-added-large-files
+        args: [--maxkb=500]       # Prevent committing large files
+      - id: check-merge-conflict  # Catch merge conflict markers

@@ -38,12 +38,14 @@ dev = [
 [tool.ruff]
 line-length = 120
 target-version = "py313"
-exclude = ["venv/", ".venv/", "env/", ".env/"]
+exclude = ["venv/", ".venv/", "env/", ".env/", "db/data"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "N", "UP", "B", "C4"]
 ignore = ["E501"]
-"__init__.py" = ["F401"] 
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
 
 [tool.mypy]
 python_version = "3.13"
@@ -54,4 +56,4 @@ warn_redundant_casts = true
 warn_unused_ignores = true
 no_implicit_optional = true
 exclude = "venv/|.venv/|env/|.env/"
-ignore_missing_imports = true 
+ignore_missing_imports = true

@@ -3,13 +3,15 @@
 from langgraph.graph import StateGraph, START, END
 from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.store.memory import InMemoryStore
+
 from services.chat_with_movies.agent.state import GraphAgentState
+from services.chat_with_movies.agent.nodes import agent_node
 
 def temp_node():
     pass
 
 AGENT_WORKFLOW = StateGraph(GraphAgentState)
-AGENT_WORKFLOW.add_node("agent", temp_node)
+AGENT_WORKFLOW.add_node("agent", agent_node)
 AGENT_WORKFLOW.add_node("subagent", temp_node)
 AGENT_WORKFLOW.add_node("tool", temp_node)
 AGENT_WORKFLOW.add_node("ask_human", temp_node)

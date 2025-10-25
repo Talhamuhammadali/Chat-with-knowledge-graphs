@@ -27,3 +27,31 @@ dependencies = [
     "trustcall",
     "wikipedia",
 ]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.18.2",
+    "pre-commit>=4.3.0",
+    "ruff>=0.14.2",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+exclude = ["venv/", ".venv/", "env/", ".env/"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "C4"]
+ignore = ["E501"]
+"__init__.py" = ["F401"] 
+
+[tool.mypy]
+python_version = "3.13"
+warn_unused_configs = true
+warn_return_any = true
+check_untyped_defs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+no_implicit_optional = true
+exclude = "venv/|.venv/|env/|.env/"
+ignore_missing_imports = true 

@@ -36,8 +36,34 @@ jupyter notebook         # Start Jupyter for development notebooks
 - **Memory/Checkpointing**: langgraph-checkpoint-redis, langgraph-checkpoint-sqlite
 - **Tools**: tavily-python (search), trustcall, wikipedia, notebook
 
+## Project Structure
+```
+services/
+├── main.py                      # Main application entry point
+├── connections.py               # Neo4j database connection setup
+├── utils/
+│   └── llm.py                  # LLM provider abstraction (Anthropic, OpenAI, Google)
+└── chat_with_movies/            # Movie recommendation agent service
+    ├── model.py                 # Neomodel schema (Movie, Person nodes)
+    ├── queries.py               # Neo4j query utilities
+    └── agent/                   # LangGraph agent implementation
+        ├── state.py             # Agent state definition
+        ├── graph.py             # LangGraph workflow (agent, subagent, tool, ask_human nodes)
+        ├── nodes.py             # Agent node implementations
+        ├── tools.py             # Agent tools
+        ├── prompts.py           # System prompts
+        └── models.py            # Pydantic models
+```
+
 ## Architecture Notes
-- Early stage project with minimal code structure (main.py contains basic hello world)
-- Designed for RAG systems using knowledge graphs
+- Service-based structure: Each use case in its own service directory
+- Designed for RAG systems using knowledge graphs instead of vector databases
 - Agent-based workflows with memory persistence
 - Uses both Redis (short-term) and SQLite (long-term) for agent memory
+
+### Current Services
+**chat_with_movies**: Movie recommendation agent using Neo4j knowledge graph
+- Knowledge graph model with Movie and Person nodes (ACTED_IN, DIRECTED, etc. relationships)
+- LangGraph-based agent with conditional routing
+- Query utilities for graph traversal
+- Status: WIP - agent nodes, tools, and routing logic being implemented

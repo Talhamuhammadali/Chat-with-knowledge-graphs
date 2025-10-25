@@ -25,7 +25,7 @@ services:
           neo4j-admin database load --from-path=/dumps/ neo4j --overwrite-destination=true
         fi
       "
-    
+
   neo4j:
     image: neo4j:latest
     container_name: neo4j

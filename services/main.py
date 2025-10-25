@@ -1,8 +1,9 @@
+from connections import get_db_status, setup_basic_connection
 from dotenv import load_dotenv
-from utils.llm import test_all_models, test_langchain_init_models
-from connections import setup_basic_connection, get_db_status
+from utils.llm import test_langchain_init_models
 
 load_dotenv()
+
 
 def main():
     print("Hello from chat-with-knowledge-graphs!")

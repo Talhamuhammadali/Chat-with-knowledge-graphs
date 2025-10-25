@@ -1,42 +1,53 @@
 """Langchain Chats Agents."""
-from typing import Optional
-from langchain_anthropic.chat_models import ChatAnthropic
-from langchain_openai.chat_models import ChatOpenAI 
-from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain.chat_models.base import BaseChatModel
-from langchain.chat_models import init_chat_model
 
-def get_chat_model(model_provider: str, model_name: Optional[str] = None, temperature: float = 0.0) -> BaseChatModel:
+from langchain.chat_models import init_chat_model
+from langchain.chat_models.base import BaseChatModel
+from langchain_anthropic.chat_models import ChatAnthropic
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_openai.chat_models import ChatOpenAI
+
+
+def get_chat_model(model_provider: str, model_name: str | None = None, temperature: float = 0.0) -> BaseChatModel:
     """Get the chat model based on the model name."""
     if model_provider == "openai":
         model_name = model_name or "gpt-5-codex"
         if model_name == "gpt-5-codex":
             return ChatOpenAI(model_name=model_name, temperature=temperature, use_responses_api=True)
         return ChatOpenAI(model_name=model_name, temperature=temperature, reasoning=True)
-    
+
     elif model_provider == "anthropic":
         model_name = model_name or "claude-sonnet-4-20250514"
-        return ChatAnthropic(model=model_name, max_tokens= 64000,  temperature=1.0, thinking={"type": "enabled", "budget_tokens": 2000})
-    
+        return ChatAnthropic(
+            model=model_name, max_tokens=64000, temperature=1.0, thinking={"type": "enabled", "budget_tokens": 2000}
+        )
+
     elif model_provider == "google":
         model_name = model_name or "gemini-2.5-pro"
         return ChatGoogleGenerativeAI(model=model_name, temperature=0.7, include_thoughts=True)
-    
+
     else:
         raise ValueError(f"Unsupported model provider: {model_provider}")
 
 
-def get_init_chat_model(model_provider: str, model_name: Optional[str] = None, temperature: float = 0.0) -> BaseChatModel:
+def get_init_chat_model(model_provider: str, model_name: str | None = None, temperature: float = 0.0) -> BaseChatModel:
     """Get the chat model using init_chat_model based on the model name."""
     if model_provider == "openai":
         model_name = model_name or "gpt-5-codex"
         if model_name == "gpt-5-codex":
-            return init_chat_model(model=model_name, model_provider=model_provider, temperature=temperature, use_responses_api=True)
+            return init_chat_model(
+                model=model_name, model_provider=model_provider, temperature=temperature, use_responses_api=True
+            )
         return init_chat_model(model=model_name, model_provider=model_provider, temperature=temperature, reasoning=True)
 
     elif model_provider == "anthropic":
         model_name = model_name or "claude-sonnet-4-20250514"
-        return init_chat_model(model=model_name, model_provider=model_provider, max_tokens=64000, temperature=1.0, thinking={"type": "enabled", "budget_tokens": 2000})
+        return init_chat_model(
+            model=model_name,
+            model_provider=model_provider,
+            max_tokens=64000,
+            temperature=1.0,
+            thinking={"type": "enabled", "budget_tokens": 2000},
+        )
 
     elif model_provider == "google_genai":
         model_name = model_name or "gemini-2.5-pro"
@@ -63,7 +74,7 @@ def test_all_models():
             print(f"Model: {model.model_dump()}")
 
             print(f"\nPrompt: {test_prompt}")
-            print(f"\nResponse:")
+            print("\nResponse:")
             print("-" * 30)
 
             response = model.invoke(test_prompt)
@@ -88,19 +99,17 @@ def test_langchain_init_models():
         print(f"{'='*50}")
 
         try:
-            model = get_init_chat_model(model_provider=model)
-            print(f"Model: {model.model_dump()}")
+            llm = get_init_chat_model(model_provider=model)
+            print(f"Model: {llm.model_dump()}")
 
             print(f"\nPrompt: {test_prompt}")
-            print(f"\nResponse:")
+            print("\nResponse:")
             print("-" * 30)
 
-            response = model.invoke(test_prompt)
+            response = llm.invoke(test_prompt)
             response.pretty_print()
 
         except Exception as e:
             print(f"Error testing {model}: {str(e)}")
 
         print("-" * 50)
-
-

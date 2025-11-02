@@ -60,7 +60,10 @@ def get_init_chat_model(model_provider: str, model_name: str | None = None, temp
 def test_all_models():
     """Test function to invoke each model provider and print their outputs."""
 
-    test_prompt = "Provide a brief introduction about yourself as an AI language model and summarize your key capabilities in 2-3 sentences."
+    test_prompt = (
+        "Provide a brief introduction about yourself as an AI language model and summarize"
+        " your key capabilities in 2-3 sentences."
+    )
 
     providers = ["openai", "anthropic", "google"]
 
@@ -89,7 +92,10 @@ def test_all_models():
 def test_langchain_init_models():
     """Test function to invoke each model provider with langchain init and print their outputs."""
 
-    test_prompt = "Provide a brief introduction about yourself as an AI language model and summarize your key capabilities in 2-3 sentences."
+    test_prompt = (
+        "Provide a brief introduction about yourself as an AI language model and summarize "
+        "your key capabilities in 2-3 sentences."
+    )
 
     models = ["openai", "anthropic", "google_genai"]
 
@@ -113,3 +119,27 @@ def test_langchain_init_models():
             print(f"Error testing {model}: {str(e)}")
 
         print("-" * 50)
+
+
+def get_available_models_configs() -> dict:
+    """Get a list of available models from each provider."""
+    avaialable_models = {
+        "openai": [
+            "gpt-5-codex",
+        ],
+        "anthropic": [
+            "claude-sonnet-4-20250514",
+        ],
+        "google_genai": [
+            "gemini-2.5-pro",
+        ],
+    }
+    print(avaialable_models)
+    avaialable_model_configs: dict = {"models": []}
+    return avaialable_model_configs
+
+
+def get_chat_model_with_model_config(model_config: dict) -> BaseChatModel:
+    """Get chat model with model config."""
+    chat_llm = init_chat_model(**model_config)
+    return chat_llm

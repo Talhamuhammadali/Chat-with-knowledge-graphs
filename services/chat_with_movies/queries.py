@@ -25,7 +25,8 @@ def get_all_nodes() -> dict:
     """
     Get all nodes with their labels and properties.
 
-    Returns:
+    Returns
+    -------
         dict: Dictionary with node data organized by labels
     """
     query = """
@@ -68,7 +69,8 @@ def get_nodes_count_by_label(label: str) -> int:
     """
     Get the total count of all nodes in the database.
 
-    Returns:
+    Returns
+    -------
         int: Total number of nodes
     """
     query = f"MATCH (n:{label}) RETURN count(n) AS total_nodes"
@@ -91,7 +93,8 @@ def get_by_label(label: str, limit: int = 10) -> list:
         label (str): The label of the nodes to retrieve.
         limit (int): The maximum number of nodes to return.
 
-    Returns:
+    Returns
+    -------
         list: List of nodes with the specified label
     """
     query = f"""

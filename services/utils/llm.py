@@ -59,7 +59,6 @@ def get_init_chat_model(model_provider: str, model_name: str | None = None, temp
 
 def test_all_models():
     """Test function to invoke each model provider and print their outputs."""
-
     test_prompt = (
         "Provide a brief introduction about yourself as an AI language model and summarize"
         " your key capabilities in 2-3 sentences."
@@ -68,9 +67,9 @@ def test_all_models():
     providers = ["openai", "anthropic", "google"]
 
     for provider in providers:
-        print(f"\n{'='*50}")
+        print(f"\n{'=' * 50}")
         print(f"Testing {provider.upper()} Model")
-        print(f"{'='*50}")
+        print(f"{'=' * 50}")
 
         try:
             model = get_chat_model(provider)
@@ -91,7 +90,6 @@ def test_all_models():
 
 def test_langchain_init_models():
     """Test function to invoke each model provider with langchain init and print their outputs."""
-
     test_prompt = (
         "Provide a brief introduction about yourself as an AI language model and summarize "
         "your key capabilities in 2-3 sentences."
@@ -100,9 +98,9 @@ def test_langchain_init_models():
     models = ["openai", "anthropic", "google_genai"]
 
     for model in models:
-        print(f"\n{'='*50}")
+        print(f"\n{'=' * 50}")
         print(f"Testing {model.upper()} Model - Langchain Init")
-        print(f"{'='*50}")
+        print(f"{'=' * 50}")
 
         try:
             llm = get_init_chat_model(model_provider=model)

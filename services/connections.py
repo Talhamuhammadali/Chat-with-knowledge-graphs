@@ -6,8 +6,7 @@ from neomodel import config, db
 
 
 def setup_basic_connection():
-    """
-    Set up basic connection to Neo4j
+    """Set up basic connection to Neo4j.
 
     Default connection assumes:
     - Neo4j running on localhost:7687
